@@ -34,6 +34,7 @@ schema.methods.generateJWT = function generateJWT() {
     return jwt.sign(
         {
         email: this.email,
+        username: this.username
         },
         'secretkey'
     );
@@ -42,7 +43,8 @@ schema.methods.generateJWT = function generateJWT() {
 schema.methods.toAuthJSON = function toAuthJSON() {
     return {
         email: this.email,
-        token: this.generateJWT()
+        token: this.generateJWT(),
+        username: this.username
     };
 };
 
