@@ -11,6 +11,12 @@ const schema = new mongoose.Schema(
             index: true,
             unique: true
         },
+        username: {
+            type: String,
+            required: true,
+            index: true,
+            unique: true
+        },
         passwordHash: { type: String, required: true },
     },
     { timestamps: true }
