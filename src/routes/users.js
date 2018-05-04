@@ -8,6 +8,7 @@ const router = express.Router();
 router.post("/", (req, res) => {
     const { email, password, username } = req.body.user;
     const user = new User({ email, username });
+    user.setBalance(10000000);
     user.setPassword(password);
     user
     .save()
@@ -21,7 +22,8 @@ router.get("/current_user", authenticate, (req, res) => {
     res.json({
         user: {
             email: req.currentUser.email,
-            username: req.currentUser.username
+            username: req.currentUser.username,
+            balance: req.currentUser.balance
         }
     });
 });

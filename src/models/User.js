@@ -17,6 +17,9 @@ const schema = new mongoose.Schema(
             index: true,
             unique: true
         },
+        balance: {
+            type: Number
+        },
         passwordHash: { type: String, required: true },
     },
     { timestamps: true }
@@ -30,11 +33,16 @@ schema.methods.setPassword = function setPassword(password) {
     this.passwordHash = bcrypt.hashSync(password);
 };
 
+schema.methods.setBalance = function setBalance(balance) {
+    this.balance = balance;
+};
+
 schema.methods.generateJWT = function generateJWT() {
     return jwt.sign(
         {
         email: this.email,
-        username: this.username
+        username: this.username,
+        balance: this.balance
         },
         'secretkey'
     );
@@ -44,7 +52,8 @@ schema.methods.toAuthJSON = function toAuthJSON() {
     return {
         email: this.email,
         token: this.generateJWT(),
-        username: this.username
+        username: this.usernamem,
+        balance: this.balance
     };
 };
 
