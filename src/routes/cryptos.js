@@ -20,11 +20,12 @@ router.get("/", (req, res) => {
                         return {
                                 id: item.id,
                                 name: item.name,
+                                market_cap_usd: item.market_cap_usd, 
                                 price_btc: item.price_btc,
                                 price_usd: item.price_usd,
                                 percent_change_24h: item.percent_change_24h,
                                 symbol: item.symbol,
-                                rank: item.rank                                
+                                rank: item.rank                               
                         }
                 })
         }))
@@ -44,10 +45,11 @@ router.get("/bitcoin-price", (req, res) => {
                         return {
                                 id: item.id,
                                 name: item.name,
+                                market_cap_usd: item.market_cap_usd, 
                                 price_btc: item.price_btc,
                                 price_usd: item.price_usd,
                                 percent_change_24h: item.percent_change_24h,
-                                symbol: item.symbol                                
+                                symbol: item.symbol,                            
                         }
                 })
         }))
@@ -61,11 +63,12 @@ router.get("/current-crypto", (req, res) => {
                         return {
                                 id: item.id,
                                 name: item.name,
+                                market_cap_usd: item.market_cap_usd,  
                                 price_btc: item.price_btc,
                                 price_usd: item.price_usd,
                                 percent_change_24h: item.percent_change_24h,
                                 symbol: item.symbol,
-                                rank: item.rank                                
+                                rank: item.rank                               
                         }
                 })
         }))
