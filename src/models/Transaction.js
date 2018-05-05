@@ -10,10 +10,11 @@ const schema = new mongoose.Schema(
             type: Number,
             required: true,
         },
-        totalget: {
-			type: Number,
-			required: true,
-        },
+        //userId: { type: mongoose.Schema.Types.ObjectId, required:true }
+        // totalget: {
+		// 	type: Number,
+		// 	required: true,
+        // },
     },
     { timestamps: true }
 );
