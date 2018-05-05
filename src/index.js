@@ -7,6 +7,7 @@ import Promise from 'bluebird';
 import auth from './routes/auth';
 import users from './routes/users';
 import cryptos from './routes/cryptos';
+import transaction from './routes/transaction';
 
 const app = express();
 app.use(bodyParser.json());
@@ -16,6 +17,7 @@ mongoose.connect("mongodb://localhost:27017/tokocrypto");
 app.use('/api/auth', auth);
 app.use('/api/users', users);
 app.use("/api/cryptos", cryptos);
+app.use("/api/transaction", transaction);
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');

@@ -32,11 +32,11 @@ router.get("/", (req, res) => {
         .catch(console.error)
 });
 
-router.post("/", (req, res) => {
-	Crypto.create({ crypto, userId: req.currentUser._id })
-		.then(crypto => res.json({ crypto }))
-		.catch(err => res.status(400).json({ errors: parseErrors(err.errors) }));
-});
+// router.post("/", (req, res) => {
+// 	Crypto.create({ crypto, userId: req.currentUser._id })
+// 		.then(crypto => res.json({ crypto }))
+// 		.catch(err => res.status(400).json({ errors: parseErrors(err.errors) }));
+// });
 
 router.get("/bitcoin-price", (req, res) => {
         client.getTicker({start: 0, limit: 1})
