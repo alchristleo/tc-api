@@ -7,15 +7,21 @@ const router = express.Router();
 
 router.post("/", (req, res) => {
     const { email, password, username } = req.body.user;
-    const user = new User({ email, username });
-    user.setBalance(10000000);
-    user.setPassword(password);
-    user
-    .save()
-    .then(userRecord => {
-        res.json({ user: userRecord.toAuthJSON() });
+    User.findOne({ email: email }).then(user => {
+        if (user) {
+            res.status(400).json({ errors: { global: "This username has been taken" } });
+        } else {
+            const user = new User({ email, username });
+            user.setBalance(10000000);
+            user.setPassword(password);
+            user
+                .save()
+                .then(userRecord => {
+                    res.json({ user: userRecord.toAuthJSON() });
+                })
+                .catch(err => res.status(400).json({ errors: parseErrors(err.errors) }));
+        }
     })
-    .catch(err => res.status(400).json({ errors: parseErrors(err.errors) }));
 });
 
 router.get("/current_user", authenticate, (req, res) => {

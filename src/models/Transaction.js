@@ -11,12 +11,16 @@ const schema = new mongoose.Schema(
             required: true,
         },
         //userId: { type: mongoose.Schema.Types.ObjectId, required:true }
-        // totalget: {
-		// 	type: Number,
-		// 	required: true,
-        // },
+        totalget: {
+			type: Number,
+			required: true,
+        },
+        type: {
+            type: String,
+            required: true,
+        }
     },
-    { timestamps: true }
+    //{ timestamps: true }
 );
 
 export default mongoose.model('Transaction', schema)
