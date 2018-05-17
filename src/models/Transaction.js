@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const schema = new mongoose.Schema(
-	{
+    {
         cryptocur: {
             type: String,
             required: true
@@ -10,15 +10,15 @@ const schema = new mongoose.Schema(
             type: Number,
             required: true,
         },
-        //userId: { type: mongoose.Schema.Types.ObjectId, required:true }
         totalget: {
-			type: Number,
-			required: true,
+            type: Number,
+            required: true,
         },
         type: {
             type: String,
             required: true,
-        }
+        },
+        userId: { type: mongoose.Schema.Types.ObjectId, required: true }
     },
     //{ timestamps: true }
 );
