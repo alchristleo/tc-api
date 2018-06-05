@@ -20,6 +20,8 @@ const schema = new mongoose.Schema(
         balance: {
             type: Number
         },
+        confirmed: { type: Boolean, default: false },
+        confirmationToken: { type: String, default: "" },
         passwordHash: { type: String, required: true },
     },
     { timestamps: true }
@@ -37,14 +39,23 @@ schema.methods.setBalance = function setBalance(balance) {
     this.balance = balance;
 };
 
+schema.methods.setConfirmationToken = function setConfirmationToken(token) {
+    this.confirmationToken = this.generateJWT();
+};
+
+schema.methods.generateConfirmationUrl = function generateConfirmationUrl() {
+    return `${process.env.HOST}/confirmation/${this.confirmationToken}`;
+};
+
 schema.methods.generateJWT = function generateJWT() {
     return jwt.sign(
         {
-        email: this.email,
-        username: this.username,
-        balance: this.balance
+            email: this.email,
+            username: this.username,
+            balance: this.balance,
+            confirmed: this.confirmed
         },
-        'secretkey'
+        process.env.SECRET_KEY
     );
 };
 
@@ -53,7 +64,8 @@ schema.methods.toAuthJSON = function toAuthJSON() {
         email: this.email,
         token: this.generateJWT(),
         username: this.usernamem,
-        balance: this.balance
+        balance: this.balance,
+        confirmed: this.confirmed
     };
 };
 

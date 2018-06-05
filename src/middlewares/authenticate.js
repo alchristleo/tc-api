@@ -8,7 +8,7 @@ export default (req, res, next) => {
     if (header) token = header.split(" ")[1];
 
     if (token) {
-        jwt.verify(token, 'secretkey', (err, decoded) => {
+        jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
             if (err) {
                 res.status(401).json({ errors: { global: "Invalid token" } });
             } else {

@@ -14,4 +14,27 @@ router.post("/", (req, res) => {
     });
 });
 
+router.post("/confirmation", (req, res) => {
+    const token = req.body.token;
+    User.findOneAndUpdate(
+        { confirmationToken: token },
+        { confirmationToken: "", confirmed: true },
+        { new: true }
+    ).then(
+        user =>
+            user ? res.json({ user: user.toAuthJSON() }) : res.status(400).json({})
+    );
+});
+
+router.post("/forgot_password", (req, res) => {
+    const { credentials } = req.body;
+    User.findOne({ email: credentials.email }).then(user => {
+        if (user) {
+            res.json({});
+        } else {
+            res.status(400).json({ errors: { global: "Email not registered!" } });
+        }
+    })
+});
+
 export default router;
