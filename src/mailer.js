@@ -23,3 +23,16 @@ export function sendConfirmationEmail(user) {
     };
     transport.sendMail(email);
 };
+
+export function sendResetPasswordEmail(user) {
+    const transport = setup();
+    const email = {
+        from: '"tokocrypto" <admin@tokocrypto.com>', // sender address
+        to: user.email, // list of receivers
+        subject: 'RESET PASSWORD', // Subject line
+        text: `Please kindly click the link below to reset your password,
+        ${user.generateResetPasswordLink()}
+        `
+    };
+    transport.sendMail(email);
+}
