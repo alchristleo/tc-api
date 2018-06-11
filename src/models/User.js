@@ -77,7 +77,7 @@ schema.methods.toAuthJSON = function toAuthJSON() {
     return {
         email: this.email,
         token: this.generateJWT(),
-        username: this.usernamem,
+        username: this.username,
         balance: this.balance,
         confirmed: this.confirmed
     };
