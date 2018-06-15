@@ -85,5 +85,11 @@ router.get("/current-crypto", (req, res) => {
                 .catch(console.error)
 });
 
+router.get("/kurs", (req, res) => {
+        rp({
+                url: 'http://free.currencyconverterapi.com/api/v5/convert?q=USD_IDR&compact=y'
+        }).pipe(res);
+});
+
 export default router;
 
