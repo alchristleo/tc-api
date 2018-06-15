@@ -1,19 +1,10 @@
 import express from 'express';
 import rp from 'request-promise';
 import CoinMarketCap from 'coinmarketcap-api';
-import Crypto from '../models/Crypto';
-import parseErrors from '../utils/parseErrors';
-//import authenticate from '../middlewares/authenticate';
 const client = new CoinMarketCap()
 const router = express.Router();
-//router.use(authenticate);
 
 router.get("/", (req, res) => {
-        // rp('https://api.coinmarketcap.com/v2/ticker/?start=1&limit=100')
-        // .then(results => res.json({
-        //         id: results.data['*']    
-        // }))
-        // .catch(err => console.log(err));
         client.getTicker({ start: 0, limit: 100 })
                 .then(results => res.json({
                         cryptos: results.map(function (item) {
@@ -41,12 +32,6 @@ router.get("/infobox-ticker", (req, res) => {
                         })
                 }));
 })
-
-// router.post("/", (req, res) => {
-// 	Crypto.create({ crypto, userId: req.currentUser._id })
-// 		.then(crypto => res.json({ crypto }))
-// 		.catch(err => res.status(400).json({ errors: parseErrors(err.errors) }));
-// });
 
 router.get("/bitcoin-price", (req, res) => {
         client.getTicker({ start: 0, limit: 1 })

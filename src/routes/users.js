@@ -32,7 +32,8 @@ router.get("/current_user", authenticate, (req, res) => {
         user: {
             email: req.currentUser.email,
             username: req.currentUser.username,
-            balance: req.currentUser.balance
+            balance: req.currentUser.balance,
+            confirmed: req.currentUser.confirmed
         }
     });
 });
